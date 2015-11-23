@@ -1,0 +1,47 @@
+#!/bin/bash   
+echo -e Hello. I am ReBot.
+
+# ask yes or no return string
+function ask_yes_or_no() {
+    read -p "$1 ([y]es or [N]o): "
+    case $(echo $REPLY | tr '[A-Z]' '[a-z]') in
+        y|yes) echo "yes" ;;
+        *)     echo "no" ;;
+    esac
+}
+
+# read string return string
+function read_variable() {
+	read -p "$1 " retval
+	echo $retval
+}
+
+# create folder return boolean
+function create_folder() {
+	if [[ ! -d $1 ]]; then
+	    mkdir $1
+	    echo "$1 folder created!"
+	    a=1
+	else
+	    echo "$1 already exists but is not a directory" 1>&2
+	    a=0
+	fi
+	return $a
+}
+
+
+if [[ "yes" == $(ask_yes_or_no "Do you want create new package ?") ]]
+then
+	p_name=$(read_variable "Package name:")
+	if [[ $(create_folder $p_name) ]]; then
+		cd $p_name
+		data= "$(curl "https://gist.githubusercontent.com/redaced/f336d6bf018534d8f650/raw/547ee9a17214f1a4698e65e5236470020e7ea8c4/shell.sh")"
+		echo $data
+		# echo 'This is a test' > answer.txt
+		echo $data > test.sh
+		# echo 'This is a test' > question.txt
+	fi
+else
+	echo "Good Bye!!! :D"	
+fi
+
