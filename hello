@@ -29,7 +29,6 @@ function create_folder() {
 	return $a
 }
 
-
 if [[ "yes" == $(ask_yes_or_no "Do you want create new package ?") ]]
 then
 	p_name=$(read_variable "Package name:")
