@@ -1,3 +1,4 @@
 # s1
 s1
-sudo cp hello /usr/bin/
+include bash_profile to `export PATH=$PATH":$HOME/bin"`
+global `sudo cp hello /usr/bin/`
